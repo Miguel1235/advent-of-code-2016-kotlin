@@ -15,7 +15,6 @@ tasks {
         gradleVersion = "8.11.1"
     }
 
-
     task("generateNextDay") {
         doLast {
             val prevDayNum = fileTree("$projectDir/src").matching {
