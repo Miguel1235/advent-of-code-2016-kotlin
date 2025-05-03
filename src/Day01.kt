@@ -18,13 +18,13 @@ private fun part1(input: List<String>, isPart2: Boolean = false): Int {
                 Direction.RIGHT to Pair(Direction.DOWN) { p: Pair<Int, Int> -> p.copy(second = p.second - 1) }),
             Direction.LEFT to mapOf(
                 Direction.LEFT to Pair(Direction.DOWN) { p: Pair<Int, Int> -> p.copy(second = p.second - 1) },
-                Direction.RIGHT to Pair(Direction.UP) { p: Pair<Int, Int> -> p.copy(second = p.second + 1) }))
+                Direction.RIGHT to Pair(Direction.UP) { p: Pair<Int, Int> -> p.copy(second = p.second + 1) })
+        )
 
-    for (instruction in instructions) {
-        val (newDir, moveFunc) = directionChanges[dir]!![instruction.dir]!!
+    instructions.forEach {
+        val (newDir, moveFunc) = directionChanges[dir]!![it.dir]!!
         dir = newDir
-
-        repeat(instruction.amount) {
+        repeat(it.amount) {
             path.add(moveFunc(path.last()))
         }
     }
