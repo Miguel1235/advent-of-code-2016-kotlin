@@ -2,90 +2,40 @@ import kotlin.math.abs
 
 private fun part1(input: List<String>, isPart2: Boolean = false): Int {
     val instructions = parseInput(input)
-
     var dir = Direction.UP
-    val path: MutableList<Pair<Int, Int>> = mutableListOf(Pair(0, 0))
+    val path = mutableListOf(Pair(0, 0))
+
+    val directionChanges =
+        mapOf(
+            Direction.UP to mapOf(
+                Direction.RIGHT to Pair(Direction.RIGHT) { p: Pair<Int, Int> -> p.copy(first = p.first + 1) },
+                Direction.LEFT to Pair(Direction.LEFT) { p: Pair<Int, Int> -> p.copy(first = p.first - 1) }),
+            Direction.DOWN to mapOf(
+                Direction.RIGHT to Pair(Direction.LEFT) { p: Pair<Int, Int> -> p.copy(first = p.first - 1) },
+                Direction.LEFT to Pair(Direction.RIGHT) { p: Pair<Int, Int> -> p.copy(first = p.first + 1) }),
+            Direction.RIGHT to mapOf(
+                Direction.LEFT to Pair(Direction.UP) { p: Pair<Int, Int> -> p.copy(second = p.second + 1) },
+                Direction.RIGHT to Pair(Direction.DOWN) { p: Pair<Int, Int> -> p.copy(second = p.second - 1) }),
+            Direction.LEFT to mapOf(
+                Direction.LEFT to Pair(Direction.DOWN) { p: Pair<Int, Int> -> p.copy(second = p.second - 1) },
+                Direction.RIGHT to Pair(Direction.UP) { p: Pair<Int, Int> -> p.copy(second = p.second + 1) }))
 
     for (instruction in instructions) {
-        when {
-            dir == Direction.UP && instruction.dir == Direction.RIGHT -> {
-                dir = Direction.RIGHT
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(++row, col))
-                }
-            }
+        val (newDir, moveFunc) = directionChanges[dir]!![instruction.dir]!!
+        dir = newDir
 
-            dir == Direction.UP && instruction.dir == Direction.LEFT -> {
-                dir = Direction.LEFT
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(--row, col))
-                }
-            }
-
-            dir == Direction.DOWN && instruction.dir == Direction.RIGHT -> {
-                dir = Direction.LEFT
-
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(--row, col))
-                }
-            }
-
-            dir == Direction.DOWN && instruction.dir == Direction.LEFT -> {
-                dir = Direction.RIGHT
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(++row, col))
-                }
-            }
-
-            dir == Direction.RIGHT && instruction.dir == Direction.LEFT -> {
-                dir = Direction.UP
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(row, ++col))
-                }
-            }
-
-            dir == Direction.RIGHT && instruction.dir == Direction.RIGHT -> {
-                dir = Direction.DOWN
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(row, --col))
-                }
-            }
-
-            dir == Direction.LEFT && instruction.dir == Direction.LEFT -> {
-                dir = Direction.DOWN
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(row, --col))
-                }
-            }
-
-            dir == Direction.LEFT && instruction.dir == Direction.RIGHT -> {
-                dir = Direction.UP
-                var (row, col) = path.last()
-                repeat(instruction.amount) {
-                    path.add(Pair(row, ++col))
-                }
-            }
+        repeat(instruction.amount) {
+            path.add(moveFunc(path.last()))
         }
-
     }
 
-    val (row, col) = if (isPart2) {
+    val finalPos = if (isPart2) {
         path.groupingBy { it }.eachCount().filter { it.value >= 2 }.entries.first().key
     } else {
         path.last()
     }
-    return abs(row) + abs(col)
-}
 
-private fun part2(input: List<String>): Int {
-    return 0
+    return abs(finalPos.first) + abs(finalPos.second)
 }
 
 enum class Direction {
@@ -115,4 +65,3 @@ fun main() {
     check(part1(input) == 230)
     check(part1(input, true) == 154)
 }
- 
