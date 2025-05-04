@@ -38,7 +38,7 @@ private fun part1(input: List<String>, isPart2: Boolean = false): Int {
     return abs(finalPos.first) + abs(finalPos.second)
 }
 
-enum class Direction {
+private enum class Direction {
     LEFT, RIGHT, UP, DOWN
 }
 
