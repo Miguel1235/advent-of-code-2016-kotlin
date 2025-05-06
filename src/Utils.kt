@@ -40,3 +40,14 @@ fun <T> combinations(list: List<T>, k: Int): List<List<T>> {
     backtrack(0, mutableListOf())
     return results
 }
+
+fun offsetLetter(letter: Char, offset: Int): Char {
+    val lower = letter.lowercaseChar()
+    if(lower == '-') return ' '
+
+    val baseP = lower - 'a'
+    val newP = (baseP + offset) % 26
+
+    val wrappedPosition = if (newP < 0) newP + 26 else newP
+    return 'a' + wrappedPosition
+}
