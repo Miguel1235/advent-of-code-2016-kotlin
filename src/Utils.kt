@@ -51,3 +51,27 @@ fun offsetLetter(letter: Char, offset: Int): Char {
     val wrappedPosition = if (newP < 0) newP + 26 else newP
     return 'a' + wrappedPosition
 }
+
+fun<T> prettyPrint(grid: List<List<T>>) {
+    println()
+    for(rowI in grid.indices) {
+        val row = grid[rowI]
+        for(colI in row.indices) {
+            print(row[colI])
+        }
+        println()
+    }
+}
+
+fun <T> transpose(matrix: List<List<T>>): MutableList<MutableList<T>> {
+    if (matrix.isEmpty()) return mutableListOf()
+
+    val rows = matrix.size
+    val cols = matrix[0].size
+
+    return MutableList(cols) { col ->
+        MutableList(rows) { row ->
+            matrix[row][col]
+        }
+    }
+}
