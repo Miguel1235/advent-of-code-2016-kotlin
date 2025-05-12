@@ -2,8 +2,6 @@ import kotlin.collections.component1
 import kotlin.collections.component2
 
 private fun replaceValues(line: String): String {
-//    println("The line is $line")
-
     val bracesRegex = Regex("""\((\d+)x(\d+)\)""")
     val results = bracesRegex.findAll(line)
 
@@ -70,15 +68,15 @@ private fun transformString(input: String): String {
 private fun part1(input: List<String>): Int {
     for(line in input) {
         println(transformString(line))
-//        val r = replaceValues(transformString(line))
-//        println("The result is $r -- size: ${r.length}")
+        val r = replaceValues(transformString(line))
+        println("The result is $r -- size: ${r.length}")
     }
     return 0
 }
 
-private fun part2(input: List<String>): Int {
-    return 0
-}
+//private fun part2(input: List<String>): Int {
+//    return 0
+//}
 
 fun main() {
 //    val testInput = readInput("Day09_test")
