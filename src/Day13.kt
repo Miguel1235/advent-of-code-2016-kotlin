@@ -22,7 +22,6 @@ private fun part1(maze: List<List<Char>>, end: Pair<Int, Int> = Pair(4,7)): Int 
             if (maze.getOrNull(newRow)?.getOrElse(newCol) { '@' } != '.') continue
             if(visited[newRow][newCol]) continue
 
-
             queue.add(Triple(newRow, newCol, steps + 1))
             visited[newRow][newCol] = true
         }
@@ -45,16 +44,6 @@ private fun generateMaze(favoriteNumber: Int, dimensions: Pair<Int, Int> = Pair(
             add(row)
         }
     }
-}
-
-private fun prettyPrint(maze: List<List<Char>>) {
-    for (r in maze.indices) {
-        for (c in maze[r].indices) {
-            print(maze[r][c])
-        }
-        println()
-    }
-    println("+******+")
 }
 
 fun main() {
