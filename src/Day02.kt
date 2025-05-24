@@ -1,10 +1,3 @@
-private enum class DeltaDirection(val rowDelta: Int, val colDelta: Int) {
-    UP(-1, 0),
-    DOWN(1, 0),
-    LEFT(0, -1),
-    RIGHT(0, 1)
-}
-
 private fun move(keyPad: List<List<Any?>>, position: Pair<Int, Int>, direction: DeltaDirection): Pair<Int, Int> {
     val (r, c) = position
     val newRow = r + direction.rowDelta
