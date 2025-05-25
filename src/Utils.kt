@@ -82,3 +82,9 @@ enum class DeltaDirection(val rowDelta: Int, val colDelta: Int) {
     LEFT(0, -1),
     RIGHT(0, 1)
 }
+
+enum class UpperDirections(val rDelta: Int, val cDelta: Int) {
+    UP_LEFT(-1, -1),
+    UP(-1, 0),
+    UP_RIGHT(-1, 1),
+}
