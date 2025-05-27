@@ -10,22 +10,20 @@ private fun part(ranges: List<Pair<Long, Long>>, isPart1: Boolean = true, maxRan
         }
         if(allowedIp) {
             if(isPart1)  return counter
-            println("adding ip....")
             allowedIps++
         }
     }
     return allowedIps.toLong()
 }
 
-private fun parseInput(input: List<String>): List<Pair<Long, Long>> {
-    return input.map {
+val parseInput = { input: List<String> -> input.map {
         val (start, end) = it.split("-")
         start.toLong() to end.toLong()
     }
 }
 
-fun isInRange(value: Long, range: Pair<Long, Long>): Boolean {
-    return value >= range.first && value <= range.second
+val isInRange = { value: Long, range: Pair<Long, Long> ->
+    value >= range.first && value <= range.second
 }
 
 
