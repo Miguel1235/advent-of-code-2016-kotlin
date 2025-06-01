@@ -15,7 +15,7 @@ private val part = { input: List<List<Char>>, useLeastCommon: Boolean ->
     }
 }
 
-private val parseInput = { input: List<String> ->
+private val parseInput6 = { input: List<String> ->
     (0 until input[0].length).map { columnIndex ->
         input.mapNotNull { row ->
             row.getOrNull(columnIndex)
@@ -24,11 +24,11 @@ private val parseInput = { input: List<String> ->
 }
 
 fun main() {
-    val testInput = parseInput(readInput("Day06_test"))
+    val testInput = parseInput6(readInput("Day06_test"))
     check(part(testInput, false) == "easter")
     check(part(testInput, true) == "advent")
 
-    val input = parseInput(readInput("Day06"))
+    val input = parseInput6(readInput("Day06"))
     check(part(input, false) == "tsreykjj")
     check(part(input, true) == "hnfbujie")
 }

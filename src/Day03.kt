@@ -23,7 +23,7 @@ private fun findValuesNotInCombination(originalList: List<Int>, combination: Lis
     return result.first()
 }
 
-private val parseInput = { input: List<String> ->
+private val parseInput3 = { input: List<String> ->
     val triangleRegex = Regex("""(\d+)\s+(\d+)\s+(\d+)""")
     input.map { it ->
         triangleRegex.find(it)!!.groupValues.drop(1).map { it.toInt() }
@@ -43,11 +43,11 @@ private val part2 = { input: List<List<Int>> ->
 }
 
 fun main() {
-    val testInput = parseInput(readInput("Day03_test"))
+    val testInput = parseInput3(readInput("Day03_test"))
     check(part1(testInput) == 3)
     check(part2(testInput) == 6)
 
-    val input = parseInput(readInput("Day03"))
+    val input = parseInput3(readInput("Day03"))
     check(part1(input) == 869)
     check(part2(input) == 1544)
 }
