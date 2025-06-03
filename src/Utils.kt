@@ -41,6 +41,19 @@ fun <T> combinations(list: List<T>, k: Int): List<List<T>> {
     return results
 }
 
+fun <T> List<T>.permutations(): List<List<T>> {
+    if (size <= 1) return listOf(this)
+
+    val result = mutableListOf<List<T>>()
+    for (i in indices) {
+        val element = this[i]
+        val remaining = this.toMutableList().apply { removeAt(i) }
+        val perms = remaining.permutations()
+        result.addAll(perms.map { listOf(element) + it })
+    }
+    return result
+}
+
 fun offsetLetter(letter: Char, offset: Int): Char {
     val lower = letter.lowercaseChar()
     if(lower == '-') return ' '

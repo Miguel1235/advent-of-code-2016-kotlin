@@ -102,6 +102,15 @@ private fun parseInput(input: List<String>): List<Pair<InstructionType, List<Str
     }
 }
 
+private fun part2(instructions: List<Pair<InstructionType, List<String>>>, text: String = "fbgdceah"): String {
+    val permutations = text.toList().permutations().map { it.joinToString("") }.toSet()
+
+    for(permutation in permutations) {
+        if(part1(instructions, permutation) == "fbgdceah") return permutation
+    }
+    return ""
+}
+
 private fun part1(instructions:  List<Pair<InstructionType, List<String>>>, text: String = "abcde"): String {
     var scrambledText = text
 
@@ -124,5 +133,6 @@ fun main() {
 
     val input = parseInput(readInput("Day21"))
     check(part1(input, "abcdefgh") == "dbfgaehc")
+    check(part2(input) == "aghfcdeb")
 }
  
