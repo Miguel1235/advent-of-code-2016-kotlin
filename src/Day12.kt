@@ -30,6 +30,7 @@ private fun part1(input: List<AssembunnyInstruction>, isPart2: Boolean = false):
                 var current = registers.getOrPut(op1) { 0 }
                 registers.put(op1, --current)
             }
+            InsName.TGL -> TODO()
         }
         instructionCounter++
     }
@@ -40,7 +41,8 @@ enum class InsName {
     COPY,
     JNZ,
     INC,
-    DEC
+    DEC,
+    TGL
 }
 
 data class AssembunnyInstruction(val name: InsName, val op1: String, val op2: String? = null)
