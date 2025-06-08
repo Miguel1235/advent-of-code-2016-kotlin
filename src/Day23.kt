@@ -10,11 +10,6 @@ private fun part1(input: List<AssembunnyInstruction>, isPart2: Boolean = false):
     val instructions = input.toMutableList()
 
     while (instructionCounter < instructions.size) {
-        println(registers)
-//        println("***")
-//        instructions.forEach { println(it) }
-//        println("***")
-
         val (name, op1, op2) = instructions[instructionCounter]
         println("instruction: $name $op1 $op2")
         when (name) {
@@ -58,8 +53,6 @@ private fun part1(input: List<AssembunnyInstruction>, isPart2: Boolean = false):
     return registers.getOrElse("a") { 0 }
 }
 
-
-
 private fun parseInput(input: List<String>): List<AssembunnyInstruction> {
     val twoOperandsRegex = Regex("""(cpy|jnz) (.+) (.+)""")
     val singleOperandRegex = Regex("""(inc|dec|tgl) (\w+)""")
@@ -78,7 +71,6 @@ private fun parseInput(input: List<String>): List<AssembunnyInstruction> {
                     "dec" -> InsName.DEC
                     else -> InsName.TGL
                 }
-
                 add(AssembunnyInstruction(ins, op1))
             }
         }
@@ -87,13 +79,11 @@ private fun parseInput(input: List<String>): List<AssembunnyInstruction> {
 }
 
 fun main() {
-//    val testInput = parseInput(readInput("Day23_test"))
-//    check(part1(testInput) == 3)
-//    check(part1(testInput, true) == 42)
+    val testInput = parseInput(readInput("Day23_test"))
+    check(part1(testInput) == 3)
 
     val input = parseInput(readInput("Day23"))
-//    check(part1(input) == 12703)
+    check(part1(input) == 12703)
     part1(input, true).println()
-//    check(part1(input, true) == 9227661)
 }
  
